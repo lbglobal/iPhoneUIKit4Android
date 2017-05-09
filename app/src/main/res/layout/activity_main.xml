@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.allen.library.SuperTextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        app:sCenterTextString="@string/app_name"
+        app:sCenterTextColor="#ffffff"
+        app:sBackgroundColor="@color/colorPrimaryDark"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/item1"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                app:sLeftTextString="loading anim"
+                app:sRightIconRes="@mipmap/right_arrow"
+                app:sRightIconMarginRight="10dp"
+                app:sBackgroundDrawableRes="@drawable/btn_clickable"
+                app:sBottomLineMargin="10dp"/>
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/item2"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                app:sLeftTextString="项目二"
+                app:sRightIconRes="@mipmap/right_arrow"
+                app:sRightIconMarginRight="10dp"
+                app:sBackgroundDrawableRes="@drawable/btn_clickable"
+                app:sBottomLineMargin="10dp"/>
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/item3"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                app:sLeftTextString="项目三"
+                app:sRightIconRes="@mipmap/right_arrow"
+                app:sRightIconMarginRight="10dp"
+                app:sBackgroundDrawableRes="@drawable/btn_clickable"
+                app:sLineShow="none"/>
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/item4"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="20dp"
+                app:sLeftTextString="项目四"
+                app:sRightIconRes="@mipmap/right_arrow"
+                app:sRightIconMarginRight="10dp"
+                app:sBackgroundDrawableRes="@drawable/btn_clickable"
+                app:sBottomLineMargin="10dp"/>
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/item5"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                app:sLeftTextString="项目五"
+                app:sRightIconRes="@mipmap/right_arrow"
+                app:sRightIconMarginRight="10dp"
+                app:sBackgroundDrawableRes="@drawable/btn_clickable"
+                app:sLineShow="none"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
