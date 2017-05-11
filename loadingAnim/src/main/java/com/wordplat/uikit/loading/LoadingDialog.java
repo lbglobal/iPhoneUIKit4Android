@@ -29,7 +29,7 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.wordplat.uikit.R;
+import com.wordplat.uikit.loading.R;
 
 public class LoadingDialog {
 

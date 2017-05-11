@@ -64,4 +64,5 @@ dependencies {
     compile 'com.github.lygttpod:SuperTextView:1.1.2'
 
     compile project(':loadingAnim')
+    compile project(':dialog')
 }

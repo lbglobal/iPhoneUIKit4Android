@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#eeeeee"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:background="#eeeeee"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
 
-    <com.allen.library.SuperTextView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/title_height"
-        app:sCenterTextString="@string/app_name"
-        app:sCenterTextColor="#ffffff"
-        app:sBackgroundColor="@color/colorPrimaryDark"/>
+    <include layout="@layout/title_style_left_btn" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,14 +14,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <com.allen.library.SuperTextView
                 android:id="@+id/item1"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                app:sLeftTextString="Loading anim"
+                app:sLeftTextString="Confirm dialog"
                 app:sRightIconRes="@mipmap/right_arrow"
                 app:sRightIconMarginRight="10dp"
                 app:sBackgroundDrawableRes="@drawable/btn_clickable"
@@ -37,7 +31,7 @@
                 android:id="@+id/item2"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                app:sLeftTextString="Dialog"
+                app:sLeftTextString="I know dialog"
                 app:sRightIconRes="@mipmap/right_arrow"
                 app:sRightIconMarginRight="10dp"
                 app:sBackgroundDrawableRes="@drawable/btn_clickable"
@@ -47,18 +41,17 @@
                 android:id="@+id/item3"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                app:sLeftTextString="项目三"
+                app:sLeftTextString="Message dialog"
                 app:sRightIconRes="@mipmap/right_arrow"
                 app:sRightIconMarginRight="10dp"
                 app:sBackgroundDrawableRes="@drawable/btn_clickable"
-                app:sLineShow="none"/>
+                app:sBottomLineMargin="10dp"/>
 
             <com.allen.library.SuperTextView
                 android:id="@+id/item4"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_marginTop="20dp"
-                app:sLeftTextString="项目四"
+                app:sLeftTextString="Simple alert dialog"
                 app:sRightIconRes="@mipmap/right_arrow"
                 app:sRightIconMarginRight="10dp"
                 app:sBackgroundDrawableRes="@drawable/btn_clickable"
@@ -68,11 +61,21 @@
                 android:id="@+id/item5"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                app:sLeftTextString="项目五"
+                app:sLeftTextString="Title dialog"
                 app:sRightIconRes="@mipmap/right_arrow"
                 app:sRightIconMarginRight="10dp"
                 app:sBackgroundDrawableRes="@drawable/btn_clickable"
-                app:sLineShow="none"/>
+                app:sBottomLineMargin="10dp"/>
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/item6"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                app:sLeftTextString="Update dialog"
+                app:sRightIconRes="@mipmap/right_arrow"
+                app:sRightIconMarginRight="10dp"
+                app:sBackgroundDrawableRes="@drawable/btn_clickable"
+                app:sBottomLineMargin="10dp"/>
 
         </LinearLayout>
 

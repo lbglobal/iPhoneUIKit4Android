@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_dialog_radius"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <TextView android:id="@+id/Dialog_Title"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_centerInParent="true"
+                      android:textStyle="bold"
+                      android:text="标题"
+                      android:textColor="#000000"
+                      android:textSize="17dp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="15dp">
+
+            <TextView android:id="@+id/Dialog_Text"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_centerInParent="true"
+                      android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
+                      android:textColor="@color/dlg_text"
+                      android:textSize="15dp"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/dlg_divider"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <Button android:id="@+id/Dialog_Action_But"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="知道了"
+                    android:textSize="17dp"
+                    android:textColor="@color/dlg_action_but"
+                    android:background="@drawable/btn_dlg_single_radius"
+                    style="?attr/borderlessButtonStyle"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

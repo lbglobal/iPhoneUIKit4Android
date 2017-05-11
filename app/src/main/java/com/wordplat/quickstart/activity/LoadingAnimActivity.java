@@ -3,11 +3,15 @@ package com.wordplat.quickstart.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
+import com.allen.library.SuperTextView;
 import com.wordplat.quickstart.R;
 import com.wordplat.uikit.loading.LoadingDialog;
 
 import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.ViewInject;
 
 /**
  * <p>LoadingAnimActivity</p>
@@ -19,12 +23,28 @@ import org.xutils.view.annotation.ContentView;
 @ContentView(R.layout.activity_loadinganim)
 public class LoadingAnimActivity extends BaseActivity {
 
+    @ViewInject(R.id.titleView) private SuperTextView titleView = null;
+    @ViewInject(R.id.backBut) private TextView backBut = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        LoadingDialog loadingDialog = LoadingDialog.create(mActivity).setCancellable(true);
+        initUI();
+    }
 
+    private void initUI() {
+        titleView.setCenterString("Loading anim");
+        backBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+
+        LoadingDialog loadingDialog = LoadingDialog.create(mActivity)
+                .setCancellable(true);
         loadingDialog.show();
     }
 

@@ -28,7 +28,7 @@ public class MainActivity extends BaseActivity {
                 break;
 
             case R.id.item2:
-                Toast.makeText(mActivity, "项目二", Toast.LENGTH_SHORT).show();
+                startActivity(DialogExampleActivity.createIntent(mActivity));
                 break;
 
             case R.id.item3:

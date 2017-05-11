@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_dialog_radius"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="45dp"
+            android:layout_margin="10dp">
+
+            <TextView android:id="@+id/Dialog_Text"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_centerInParent="true"
+                      android:text="确定执行？"
+                      android:textColor="@color/dlg_text"
+                      android:textSize="17dp"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/dlg_divider"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <View android:id="@+id/Dialog_Bottom_Line"
+                  android:layout_width="0.5dp"
+                  android:layout_height="match_parent"
+                  android:background="@color/dlg_divider"
+                  android:layout_centerHorizontal="true"/>
+
+            <Button android:id="@+id/Dialog_Cancel_But"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toLeftOf="@id/Dialog_Bottom_Line"
+                    android:text="取消"
+                    android:textSize="17dp"
+                    android:textColor="@color/dlg_cancel_but"
+                    android:background="@drawable/btn_dlg_left_radius"
+                    style="?attr/borderlessButtonStyle"/>
+
+            <Button android:id="@+id/Dialog_Action_But"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/Dialog_Bottom_Line"
+                    android:text="确定"
+                    android:textSize="17dp"
+                    android:textColor="@color/dlg_action_but"
+                    android:background="@drawable/btn_dlg_right_radius"
+                    style="?attr/borderlessButtonStyle"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

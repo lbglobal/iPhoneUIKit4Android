@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 对话框相关 -->
+    <color name="dlg_divider">#cccccc</color>
+    <color name="dlg_cancel_but">#888888</color>
+    <color name="dlg_action_but">#1e82d2</color>
+    <color name="dlg_text">#282b34</color>
+    <color name="ripple">#D8D8D8</color>
+
+</resources>
