@@ -17,31 +17,43 @@
 package com.wordplat.uikit.loading;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
 import com.wordplat.uikit.loading.R;
 
-class SpinView extends ImageView implements Indeterminate {
+public class SpinView extends ImageView implements Indeterminate {
 
     private float mRotateDegrees;
     private int mFrameTime;
     private boolean mNeedToUpdateView;
     private Runnable mUpdateViewRunnable;
 
+    private Context context;
+
     public SpinView(Context context) {
-        super(context);
-        init();
+        this(context, null);
     }
 
     public SpinView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
+        this(context, attrs, 0);
     }
 
-    private void init() {
-        setImageResource(R.drawable.loading_spinner);
+    public SpinView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+
+        initUI(context, attrs, defStyleAttr);
+    }
+
+    private void initUI(Context context, AttributeSet attrs, int defStyleAttr) {
+        this.context = context;
+
+        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SpinView, defStyleAttr, 0);
+        int loadingResId = a.getResourceId(R.styleable.SpinView_loadingImage, R.drawable.loading_spinner);
+
+        setImageResource(loadingResId);
         mFrameTime = 1000 / 12;
         mUpdateViewRunnable = new Runnable() {
             @Override

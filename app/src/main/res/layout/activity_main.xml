@@ -64,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="20dp"
-                app:sLeftTextString="项目四"
+                app:sLeftTextString="Network empty layout"
                 app:sRightIconRes="@mipmap/right_arrow"
                 app:sRightIconMarginRight="10dp"
                 app:sBackgroundDrawableRes="@drawable/btn_clickable"

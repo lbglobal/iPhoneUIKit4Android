@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.wordplat.quickstart.R;
+import com.wordplat.uikit.loading.NetworkEmptyLayout;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -43,7 +44,7 @@ public class MainActivity extends BaseActivity {
                 break;
 
             case R.id.item4:
-                Toast.makeText(mActivity, "项目四", Toast.LENGTH_SHORT).show();
+                startActivity(NetworkEmptyLayoutExampleActivity.createIntent(mActivity));
                 break;
 
             case R.id.item5:

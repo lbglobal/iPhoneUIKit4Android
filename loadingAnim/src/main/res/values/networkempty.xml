@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="NetworkEmptyLayout">
+        <attr name="loadingView" format="reference"/>
+        <attr name="errorView" format="reference"/>
+        <attr name="emptyView" format="reference"/>
+        <attr name="noNetworkView" format="reference"/>
+    </declare-styleable>
+
+    <item name="nEmptyView" type="id"/>
+    <item name="nErrorView" type="id"/>
+    <item name="nLoadingView" type="id"/>
+    <item name="nContentView" type="id"/>
+    <item name="nNoNetworkView" type="id"/>
+
+    <item name="nRetryBut" type="id" />
+    <item name="nEmptyRetryView" type="id"/>
+    <item name="nErrorRetryView" type="id"/>
+    <item name="nNoNetworkRetryView" type="id"/>
+
+    <string name="empty_view_hint">暂无数据</string>
+    <string name="error_view_hint">加载失败</string>
+    <string name="no_network_view_hint">网络异常</string>
+
+
+
+</resources>
