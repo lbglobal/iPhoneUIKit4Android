@@ -63,7 +63,5 @@ dependencies {
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.github.lygttpod:SuperTextView:1.1.2'
 
-    compile project(':loadingAnim')
-    compile project(':dialog')
-    compile project(':splash')
+    compile project(':app-library')
 }
