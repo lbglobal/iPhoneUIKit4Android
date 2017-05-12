@@ -1,1 +1,4 @@
-include ':app', ':loadingAnim', ':dialog'
+include ':app'
+include ':loadingAnim'
+include ':dialog'
+include ':splash'

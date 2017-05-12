@@ -7,6 +7,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <com.wordplat.quickstart.widget.custom.CustomStatusBarView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:showAlways="false"
+        app:showAfterSdkVersionInt="19"/>
+
     <com.allen.library.SuperTextView
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
@@ -47,7 +53,7 @@
                 android:id="@+id/item3"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                app:sLeftTextString="项目三"
+                app:sLeftTextString="WebView"
                 app:sRightIconRes="@mipmap/right_arrow"
                 app:sRightIconMarginRight="10dp"
                 app:sBackgroundDrawableRes="@drawable/btn_clickable"

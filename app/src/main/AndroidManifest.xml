@@ -19,18 +19,24 @@
           对于应用内跳转到 MainActivity 的某一个 fragment 非常有作用 -->
 
         <activity
-            android:name=".activity.MainActivity"
-            android:launchMode="singleTask">
+            android:name=".activity.SplashActivity"
+            android:theme="@style/SplashOverlayStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.MainActivity"
+                  android:launchMode="singleTask" />
+
         <activity android:name=".activity.LoadingAnimActivity"
                   android:screenOrientation="portrait" />
 
         <activity android:name=".activity.DialogExampleActivity"
+                  android:screenOrientation="portrait" />
+
+        <activity android:name=".activity.WebViewActivity"
                   android:screenOrientation="portrait" />
 
         <!-- ################################# 其它设定 ######################################### -->

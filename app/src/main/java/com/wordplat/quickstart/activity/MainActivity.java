@@ -1,5 +1,7 @@
 package com.wordplat.quickstart.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -17,6 +19,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setTranslucentStatus(true);
     }
 
     @Event(value = {R.id.item1, R.id.item2, R.id.item3,
@@ -32,7 +36,10 @@ public class MainActivity extends BaseActivity {
                 break;
 
             case R.id.item3:
-                Toast.makeText(mActivity, "项目三", Toast.LENGTH_SHORT).show();
+                startActivity(WebViewActivity.createIntent(mActivity,
+                        WebViewActivity.class,
+                        "https://m.baidu.com/",
+                        "百度"));
                 break;
 
             case R.id.item4:
@@ -67,5 +74,10 @@ public class MainActivity extends BaseActivity {
             finish();
             System.exit(0);
         }
+    }
+
+    public static Intent createIntent(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        return intent;
     }
 }

@@ -12,6 +12,7 @@ import com.wordplat.quickstart.R;
 import com.wordplat.uikit.dialog.ConfirmDialog;
 import com.wordplat.uikit.dialog.IKnowDialog;
 import com.wordplat.uikit.dialog.MessageDialog;
+import com.wordplat.uikit.dialog.PosterDialog;
 import com.wordplat.uikit.dialog.SimpleAlertDialog;
 import com.wordplat.uikit.dialog.TitleDialog;
 import com.wordplat.uikit.dialog.UpdateDialog;
@@ -50,7 +51,7 @@ public class DialogExampleActivity extends BaseActivity {
         });
     }
 
-    @Event(value = {R.id.item1, R.id.item2, R.id.item3, R.id.item4,
+    @Event(value = {R.id.item1, R.id.item2, R.id.item3, R.id.item4, R.id.item7,
             R.id.item5, R.id.item6}, type = View.OnClickListener.class)
     private void onClick(View v) {
         switch (v.getId()) {
@@ -127,6 +128,11 @@ public class DialogExampleActivity extends BaseActivity {
                                 Toast.makeText(mActivity, "点击了 UpdateDialog Action_But", Toast.LENGTH_SHORT).show();
                             }
                         })
+                        .show();
+                break;
+
+            case R.id.item7:
+                PosterDialog.from(mActivity)
                         .show();
                 break;
         }

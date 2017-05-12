@@ -65,4 +65,5 @@ dependencies {
 
     compile project(':loadingAnim')
     compile project(':dialog')
+    compile project(':splash')
 }
