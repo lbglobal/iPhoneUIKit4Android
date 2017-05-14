@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:gravity="center"
-            android:text="错误"
+            android:text="@string/loading_error"
             android:layout_gravity="center_horizontal"
             android:textColor="#aaaaaa"
             android:textSize="17dp"/>
@@ -37,7 +37,7 @@
             android:clickable="true"
             android:gravity="center"
             android:background="@drawable/btn_error_refresh"
-            android:text="点击刷新"
+            android:text="@string/loading_retry"
             android:textColor="#DB5A43"
             android:textSize="16dp"
             android:visibility="visible"/>

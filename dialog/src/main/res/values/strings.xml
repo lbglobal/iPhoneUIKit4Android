@@ -1,2 +1,14 @@
 <resources>
+
+    <string name="dialog_ok">确定</string>
+    <string name="dialog_cancel">取消</string>
+    <string name="dialog_i_know">我知道了</string>
+    <string name="dialog_to_view">查看</string>
+    <string name="dialog_know">知道了</string>
+    <string name="dialog_update">更新</string>
+    <string name="dialog_quit_app">退出程序</string>
+    <string name="dialog_update_now">立即更新</string>
+    <string name="dialog_no_longer">不再提示</string>
+    <string name="dialog_next_time">稍后更新</string>
+
 </resources>

@@ -58,7 +58,7 @@
             <Button android:id="@+id/Dialog_Action_But"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="知道了"
+                    android:text="@string/dialog_know"
                     android:textSize="17dp"
                     android:textColor="@color/dlg_action_but"
                     android:background="@drawable/btn_dlg_single_radius"

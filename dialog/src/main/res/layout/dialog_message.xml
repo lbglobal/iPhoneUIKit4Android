@@ -65,7 +65,7 @@
                 android:layout_height="match_parent"
                 android:layout_toLeftOf="@id/Dialog_Bottom_Line"
                 android:background="@drawable/btn_dlg_left_radius"
-                android:text="取消"
+                android:text="@string/dialog_cancel"
                 android:textColor="@color/dlg_cancel_but"
                 android:textSize="17dp"/>
 
@@ -76,7 +76,7 @@
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@id/Dialog_Bottom_Line"
                 android:background="@drawable/btn_dlg_right_radius"
-                android:text="查看"
+                android:text="@string/dialog_to_view"
                 android:textColor="@color/dlg_action_but"
                 android:textSize="17dp"/>
 

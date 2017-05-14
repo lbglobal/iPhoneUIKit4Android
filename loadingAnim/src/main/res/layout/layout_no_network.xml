@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:gravity="center"
-            android:text="无网络连接"
+            android:text="@string/loading_network_none"
             android:layout_gravity="center_horizontal"
             android:textColor="#aaaaaa"
             android:textSize="17dp"/>

@@ -64,7 +64,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/btn_dlg_left_stroke"
-                android:text="取消"
+                android:text="@string/dialog_cancel"
                 android:textColor="#000000"
                 android:textSize="17dp"/>
 
@@ -76,7 +76,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/btn_dlg_right_solid"
-                android:text="确定"
+                android:text="@string/dialog_ok"
                 android:textColor="#ffffff"
                 android:textSize="17dp"/>
 

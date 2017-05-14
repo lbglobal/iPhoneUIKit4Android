@@ -38,7 +38,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/btn_dlg_single_radius"
-                    android:text="我知道了"
+                    android:text="@string/dialog_i_know"
                     android:textColor="@color/dlg_action_but"
                     android:textSize="17dp"/>
 

@@ -64,7 +64,7 @@ public abstract class AbstractSplashActivity extends Activity {
             if (!continueBut.isShown()) {
                 continueBut.setVisibility(View.VISIBLE);
             }
-            continueBut.setText(String.format("%dS跳过", remainSeconds));
+            continueBut.setText(String.format(getResources().getString(R.string.splash_continue), remainSeconds));
         }
     }
 

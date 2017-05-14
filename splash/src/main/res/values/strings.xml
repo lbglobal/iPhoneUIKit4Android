@@ -1,2 +1,8 @@
 <resources>
+
+    <string name="splash_download_ready">准备下载...</string>
+    <string name="splash_download_failed">下载失败</string>
+    <string name="splash_downloading">正在下载：</string>
+    <string name="splash_continue">%dS跳过</string>
+
 </resources>

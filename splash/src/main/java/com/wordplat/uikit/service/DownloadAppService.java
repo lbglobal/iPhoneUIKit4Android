@@ -15,6 +15,8 @@ import android.support.v4.app.NotificationCompat.Builder;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
 
+import com.wordplat.uikit.splash.R;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -239,7 +241,9 @@ public class DownloadAppService extends Service {
         notifyBean.setAppUrl(appUrl);
         notifyBean.setNotificationId(notificationId);
 
-        builder.setContentTitle(appName).setContentText("准备下载...").setSmallIcon(iconResId);
+        builder.setContentTitle(appName)
+                .setContentText(getResources().getString(R.string.splash_download_ready))
+                .setSmallIcon(iconResId);
         notifyManager.notify(notifyBean.getNotificationId(), builder.build());
 
         Log.i(TAG, "##d onHandleIntent: appName = " + appName + ", appUrl = " + appUrl + ", notificationId = " + notificationId);
@@ -328,7 +332,7 @@ public class DownloadAppService extends Service {
 
     private void updateFailed(NotifyBean notifyBean) {
         builder.setContentTitle(notifyBean.getAppName())
-                .setContentText("下载失败")
+                .setContentText(getResources().getString(R.string.splash_download_failed))
                 .setProgress(100, 0, false)
                 .setSmallIcon(notifyBean.getIconResId());
         notifyManager.notify(notifyBean.getNotificationId(), builder.build());
@@ -338,7 +342,7 @@ public class DownloadAppService extends Service {
 //        Log.e(TAG, "##d updateProgress: notificationId = " + notificationId + ", progress = " + progress);
         // "正在下载:" + progress + "%"
         builder.setContentTitle(notifyBean.getAppName())
-                .setContentText("正在下载: " + notifyBean.getProgress() + "%")
+                .setContentText(getResources().getString(R.string.splash_downloading) + notifyBean.getProgress() + "%")
                 .setProgress(100, notifyBean.getProgress(), false)
                 .setSmallIcon(notifyBean.getIconResId());
         // setContentInent如果不设置在4.0+上没有问题，在4.0以下会报异常

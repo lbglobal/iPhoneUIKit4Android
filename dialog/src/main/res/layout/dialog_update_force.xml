@@ -18,7 +18,7 @@
             android:layout_height="48dp"
             android:gravity="center"
             android:textStyle="bold"
-            android:text="更新"
+            android:text="@string/dialog_update"
             android:textSize="18dp"
             android:textColor="#281616"/>
 
@@ -50,7 +50,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/btn_dlg_left_radius"
-                android:text="退出程序"
+                android:text="@string/dialog_quit_app"
                 android:textSize="16.5dp"
                 android:textColor="@color/dlg_cancel_but"/>
 
@@ -67,7 +67,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/btn_dlg_right_radius"
                 android:textStyle="bold"
-                android:text="立即更新"
+                android:text="@string/dialog_update_now"
                 android:textSize="16.5dp"
                 android:textColor="@color/dlg_action_but"/>
 
