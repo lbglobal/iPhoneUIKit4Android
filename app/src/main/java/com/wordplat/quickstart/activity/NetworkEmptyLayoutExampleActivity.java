@@ -45,7 +45,7 @@ public class NetworkEmptyLayoutExampleActivity extends BaseActivity {
             }
         });
 
-        emptyLayout.setOnRetryClickListener(new View.OnClickListener() {
+        emptyLayout.setEmptyRetryClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 emptyLayout.showLoading();

@@ -6,6 +6,7 @@
         <attr name="errorView" format="reference"/>
         <attr name="emptyView" format="reference"/>
         <attr name="noNetworkView" format="reference"/>
+        <attr name="timeoutView" format="reference" />
     </declare-styleable>
 
     <item name="nEmptyView" type="id"/>
@@ -18,5 +19,6 @@
     <item name="nEmptyRetryView" type="id"/>
     <item name="nErrorRetryView" type="id"/>
     <item name="nNoNetworkRetryView" type="id"/>
+    <item name="nTimeoutRetryView" type="id" />
 
 </resources>

@@ -23,23 +23,29 @@ public class NetworkEmptyLayout extends RelativeLayout {
     public static final int STATUS_EMPTY      = 0x02;
     public static final int STATUS_ERROR      = 0x03;
     public static final int STATUS_NO_NETWORK = 0x04;
+    public static final int STATUS_TIMEOUT    = 0x05;
 
     private View mEmptyView;
     private View mErrorView;
     private View mLoadingView;
     private View mNoNetworkView;
+    private View mTimeoutView;
     private View mContentView;
-    private View mEmptyRetryView;
-    private View mErrorRetryView;
-    private View mNoNetworkRetryView;
+
     private int  mEmptyViewResId;
     private int  mErrorViewResId;
     private int  mLoadingViewResId;
     private int  mNoNetworkViewResId;
+    private int  mTimeoutViewResId;
+
     private int  mViewStatus;
 
     private LayoutInflater mInflater;
-    private OnClickListener mOnRetryClickListener;
+    private OnClickListener mEmptyRetryClickListener;
+    private OnClickListener mErrorRetryClickListener;
+    private OnClickListener mNoNetworkRetryClickListener;
+    private OnClickListener mTimeoutRetryClickListener;
+
     private final ViewGroup.LayoutParams mLayoutParams =
             new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
@@ -60,6 +66,8 @@ public class NetworkEmptyLayout extends RelativeLayout {
         mErrorViewResId = a.getResourceId(R.styleable.NetworkEmptyLayout_errorView, R.layout.layout_error);
         mLoadingViewResId = a.getResourceId(R.styleable.NetworkEmptyLayout_loadingView, R.layout.layout_loading);
         mNoNetworkViewResId = a.getResourceId(R.styleable.NetworkEmptyLayout_noNetworkView, R.layout.layout_no_network);
+        mTimeoutViewResId = a.getResourceId(R.styleable.NetworkEmptyLayout_timeoutView, R.layout.layout_timeout);
+
         a.recycle();
     }
 
@@ -84,27 +92,54 @@ public class NetworkEmptyLayout extends RelativeLayout {
     }
 
     /**
-     * 设置重试点击事件
+     * 设置错误重试点击事件
      *
      * @param onRetryClickListener 重试点击事件
      */
-    public void setOnRetryClickListener(OnClickListener onRetryClickListener) {
-        this.mOnRetryClickListener = onRetryClickListener;
+    public void setErrorRetryClickListener(OnClickListener onRetryClickListener) {
+        this.mErrorRetryClickListener = onRetryClickListener;
+    }
+
+    /**
+     * 设置空重试点击事件
+     *
+     * @param onRetryClickListener 重试点击事件
+     */
+    public void setEmptyRetryClickListener(OnClickListener onRetryClickListener) {
+        this.mEmptyRetryClickListener = onRetryClickListener;
+    }
+
+    /**
+     * 设置无网络重试点击事件
+     *
+     * @param onRetryClickListener 重试点击事件
+     */
+    public void setNoNetworkRetryClickListener(OnClickListener onRetryClickListener) {
+        this.mNoNetworkRetryClickListener = onRetryClickListener;
+    }
+
+    /**
+     * 设置网络超时重试点击事件
+     *
+     * @param onRetryClickListener 重试点击事件
+     */
+    public void setTimeoutRetryClickListener(OnClickListener onRetryClickListener) {
+        this.mTimeoutRetryClickListener = onRetryClickListener;
     }
 
     /**
      * 显示空视图
      */
-    public final void showEmpty() {
+    public void showEmpty() {
         mViewStatus = STATUS_EMPTY;
         if (null == mEmptyView) {
             mEmptyView = mInflater.inflate(mEmptyViewResId, null);
-            mEmptyRetryView = mEmptyView.findViewById(R.id.nRetryBut);
-            if (mEmptyRetryView == null) {
-                mEmptyRetryView = mEmptyView.findViewById(R.id.nEmptyRetryView);
+            View emptyRetryView = mEmptyView.findViewById(R.id.nRetryBut);
+            if (emptyRetryView == null) {
+                emptyRetryView = mEmptyView.findViewById(R.id.nEmptyRetryView);
             }
-            if (null != mOnRetryClickListener && null != mEmptyRetryView) {
-                mEmptyRetryView.setOnClickListener(mOnRetryClickListener);
+            if (null != mEmptyRetryClickListener && null != emptyRetryView) {
+                emptyRetryView.setOnClickListener(mEmptyRetryClickListener);
             }
             addView(mEmptyView, 0, mLayoutParams);
         }
@@ -114,16 +149,16 @@ public class NetworkEmptyLayout extends RelativeLayout {
     /**
      * 显示错误视图
      */
-    public final void showError() {
+    public void showError() {
         mViewStatus = STATUS_ERROR;
         if (null == mErrorView) {
             mErrorView = mInflater.inflate(mErrorViewResId, null);
-            mErrorRetryView = mErrorView.findViewById(R.id.nRetryBut);
-            if (mErrorRetryView == null) {
-                mErrorRetryView = mErrorView.findViewById(R.id.nErrorRetryView);
+            View errorRetryView = mErrorView.findViewById(R.id.nRetryBut);
+            if (errorRetryView == null) {
+                errorRetryView = mErrorView.findViewById(R.id.nErrorRetryView);
             }
-            if (null != mOnRetryClickListener && null != mErrorRetryView) {
-                mErrorRetryView.setOnClickListener(mOnRetryClickListener);
+            if (null != mErrorRetryClickListener && null != errorRetryView) {
+                errorRetryView.setOnClickListener(mErrorRetryClickListener);
             }
             addView(mErrorView, 0, mLayoutParams);
         }
@@ -133,7 +168,7 @@ public class NetworkEmptyLayout extends RelativeLayout {
     /**
      * 显示加载中视图
      */
-    public final void showLoading() {
+    public void showLoading() {
         mViewStatus = STATUS_LOADING;
         if (null == mLoadingView) {
             mLoadingView = mInflater.inflate(mLoadingViewResId, null);
@@ -145,18 +180,34 @@ public class NetworkEmptyLayout extends RelativeLayout {
     /**
      * 显示无网络视图
      */
-    public final void showNoNetwork() {
+    public void showNoNetwork() {
         mViewStatus = STATUS_NO_NETWORK;
         if (null == mNoNetworkView) {
             mNoNetworkView = mInflater.inflate(mNoNetworkViewResId, null);
-            mNoNetworkRetryView = mNoNetworkView.findViewById(R.id.nRetryBut);
-            if (mNoNetworkRetryView == null) {
-                mNoNetworkRetryView = mNoNetworkView.findViewById(R.id.nNoNetworkRetryView);
+            View noNetworkRetryView = mNoNetworkView.findViewById(R.id.nRetryBut);
+            if (noNetworkRetryView == null) {
+                noNetworkRetryView = mNoNetworkView.findViewById(R.id.nNoNetworkRetryView);
             }
-            if (null != mOnRetryClickListener && null != mNoNetworkRetryView) {
-                mNoNetworkRetryView.setOnClickListener(mOnRetryClickListener);
+            if (null != mNoNetworkRetryClickListener && null != noNetworkRetryView) {
+                noNetworkRetryView.setOnClickListener(mNoNetworkRetryClickListener);
             }
             addView(mNoNetworkView, 0, mLayoutParams);
+        }
+        showViewByStatus(mViewStatus);
+    }
+
+    public void showTimeout() {
+        mViewStatus = STATUS_TIMEOUT;
+        if (null == mTimeoutView) {
+            mTimeoutView = mInflater.inflate(mTimeoutViewResId, null);
+            View timeoutRetryView = mTimeoutView.findViewById(R.id.nRetryBut);
+            if (timeoutRetryView == null) {
+                timeoutRetryView = mTimeoutView.findViewById(R.id.nTimeoutRetryView);
+            }
+            if (null != mTimeoutRetryClickListener && null != timeoutRetryView) {
+                timeoutRetryView.setOnClickListener(mTimeoutRetryClickListener);
+            }
+            addView(mTimeoutView, 0, mLayoutParams);
         }
         showViewByStatus(mViewStatus);
     }
@@ -181,6 +232,9 @@ public class NetworkEmptyLayout extends RelativeLayout {
         }
         if (null != mNoNetworkView) {
             mNoNetworkView.setVisibility(viewStatus == STATUS_NO_NETWORK ? View.VISIBLE : View.GONE);
+        }
+        if (null != mTimeoutView) {
+            mTimeoutView.setVisibility(viewStatus == STATUS_TIMEOUT ? View.VISIBLE : View.GONE);
         }
         if (null != mContentView) {
             mContentView.setVisibility(viewStatus == STATUS_CONTENT ? View.VISIBLE : View.GONE);

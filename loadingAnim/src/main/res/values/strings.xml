@@ -4,5 +4,6 @@
     <string name="loading_retry">点击刷新</string>
     <string name="loading_error">错误</string>
     <string name="loading_network_none">无网络连接</string>
+    <string name="loading_timeout">网络超时</string>
 
 </resources>
