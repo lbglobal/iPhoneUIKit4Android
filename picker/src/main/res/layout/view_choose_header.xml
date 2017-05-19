@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:background="@color/pickerview_bg_topbar"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+
+    <Button
+        style="?attr/borderlessButtonStyle"
+        android:id="@+id/Dialog_Cancel_But"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/btn_picker_action"
+        android:gravity="center"
+        android:paddingLeft="@dimen/pickerview_topbar_paddingleft"
+        android:paddingRight="@dimen/pickerview_topbar_paddingright"
+        android:text="@string/pickerview_cancel"
+        android:textColor="#888888"
+        android:textSize="17dp" />
+
+    <Button
+        style="?attr/borderlessButtonStyle"
+        android:id="@+id/Dialog_Action_But"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/btn_picker_action"
+        android:gravity="center"
+        android:paddingLeft="@dimen/pickerview_topbar_paddingright"
+        android:paddingRight="@dimen/pickerview_topbar_paddingleft"
+        android:text="@string/pickerview_submit"
+        android:textColor="#1e82d2"
+        android:textSize="17dp" />
+
+    <TextView
+        android:id="@+id/Dialog_Title"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/Dialog_Action_But"
+        android:layout_toRightOf="@id/Dialog_Cancel_But"
+        android:text="@string/pickerview_title"
+        android:textColor="#282b34"
+        android:textSize="17dp" />
+
+</RelativeLayout>

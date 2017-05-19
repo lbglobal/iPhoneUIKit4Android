@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:background="#eeeeee"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <include layout="@layout/title_style_left_btn" />
+
+    <com.wordplat.uikit.picker.wheel.lib.NumberListWheelView
+        android:id="@+id/Number_List_Wheel"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="20dp"
+        app:lwvAdditionalCenterMark="个"
+        app:lwvHighlightColor="#ff8521"
+        app:lwvMarkTextColor="#888888"
+        app:lwvCenterMarkTextSize="20dp"
+        app:lwvIntervalFactor="1.5"
+        app:lwvMarkTextSize="13dp" />
+
+</LinearLayout>

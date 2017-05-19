@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.allen.library.SuperTextView;
 import com.wordplat.quickstart.R;
@@ -46,6 +45,18 @@ public class NetworkEmptyLayoutExampleActivity extends BaseActivity {
         });
 
         emptyLayout.setEmptyRetryClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                emptyLayout.showLoading();
+                emptyLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        emptyLayout.showError();
+                    }
+                }, 3000);
+            }
+        });
+        emptyLayout.setErrorRetryClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 emptyLayout.showLoading();
