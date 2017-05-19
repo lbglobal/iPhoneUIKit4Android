@@ -1,5 +1,7 @@
 include ':app'
+include ':app-library'
+
 include ':loadingAnim'
 include ':dialog'
 include ':splash'
-include ':app-library'
+include ':picker'

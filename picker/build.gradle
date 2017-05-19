@@ -7,8 +7,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 25
-        versionCode UIKIT_LIB_VERSION_CODE as int
-        versionName UIKIT_LIB_VERSION_NAME as String
+        versionCode UIKIT_PICKER_LIB_VERSION_CODE as int
+        versionName UIKIT_PICKER_LIB_VERSION_NAME as String
     }
     buildTypes {
         release {
@@ -20,10 +20,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:' + SUPPORT_LIB_VERSION
     testCompile 'junit:junit:4.12'
-
-    compile project(':loadingAnim')
-    compile project(':dialog')
-    compile project(':splash')
-    compile project(':picker')
 }
