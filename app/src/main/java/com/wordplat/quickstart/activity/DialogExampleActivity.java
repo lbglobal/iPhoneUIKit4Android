@@ -52,7 +52,7 @@ public class DialogExampleActivity extends BaseActivity {
     }
 
     @Event(value = {R.id.item1, R.id.item2, R.id.item3, R.id.item4, R.id.item7,
-            R.id.item5, R.id.item6}, type = View.OnClickListener.class)
+            R.id.item5, R.id.item6, R.id.item8}, type = View.OnClickListener.class)
     private void onClick(View v) {
         switch (v.getId()) {
             case R.id.item1:
@@ -120,18 +120,51 @@ public class DialogExampleActivity extends BaseActivity {
 
             case R.id.item6:
                 UpdateDialog.from(mActivity)
-                        .withTitle("发现新版本")
-                        .withText("优化内存占用\n新增我的足迹功能")
+                        .withUpdateForce(false)
+                        .onNoLongerClick(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(mActivity, "点击了 不再提示", Toast.LENGTH_SHORT).show();
+                            }
+                        })
                         .onActionClick(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(mActivity, "点击了 UpdateDialog Action_But", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mActivity, "点击了 立即更新", Toast.LENGTH_SHORT).show();
                             }
                         })
+                        .onCancelClick(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(mActivity, "点击了 稍后更新", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .withTitle("发现新版本")
+                        .withText("优化内存占用\n新增我的足迹功能")
                         .show();
                 break;
 
             case R.id.item7:
+                UpdateDialog.from(mActivity)
+                        .withUpdateForce(true)
+                        .onActionClick(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(mActivity, "点击了 立即更新", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .onCancelClick(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(mActivity, "点击了 退出程序", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .withTitle("发现新版本")
+                        .withText("优化内存占用\n新增我的足迹功能\n本版本需强制更新")
+                        .show();
+                break;
+
+            case R.id.item8:
                 PosterDialog.from(mActivity)
                         .show();
                 break;

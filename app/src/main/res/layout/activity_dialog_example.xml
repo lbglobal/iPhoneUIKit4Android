@@ -81,6 +81,16 @@
                 android:id="@+id/item7"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
+                app:sLeftTextString="Update force dialog"
+                app:sRightIconRes="@mipmap/right_arrow"
+                app:sRightIconMarginRight="10dp"
+                app:sBackgroundDrawableRes="@drawable/btn_clickable"
+                app:sBottomLineMargin="10dp"/>
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/item8"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
                 app:sLeftTextString="Poster dialog"
                 app:sRightIconRes="@mipmap/right_arrow"
                 app:sRightIconMarginRight="10dp"

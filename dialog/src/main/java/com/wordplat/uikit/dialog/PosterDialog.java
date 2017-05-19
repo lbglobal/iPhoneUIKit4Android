@@ -15,12 +15,6 @@ public class PosterDialog extends BaseDialog {
         super(context);
     }
 
-    @Override
-    protected void setUpDialog() {
-        super.setUpDialog();
-        setCanceledOnTouchOutside(false);
-    }
-
     protected int getLayoutResId() {
         return R.layout.dialog_poster;
     }

@@ -39,6 +39,9 @@ public abstract class BaseDialog extends Dialog {
     protected String actionText; // 对话框动作按钮 文本
     protected String cancelText; // 对话框取消按钮 文本
 
+    private boolean isCancellable = false;
+    private boolean isCancelOutside = false;
+
     public BaseDialog(Context context) {
         super(context, R.style.CustomDialog);
         this.context = context;
@@ -52,7 +55,8 @@ public abstract class BaseDialog extends Dialog {
         window.setAttributes(lp);
         window.setGravity(Gravity.CENTER);
 
-        setCancelable(true);
+        setCancelable(isCancellable);
+        setCanceledOnTouchOutside(isCancelOutside);
     }
 
     @Override
@@ -132,6 +136,16 @@ public abstract class BaseDialog extends Dialog {
 
     public BaseDialog withCancel(String text) {
         cancelText = text;
+        return this;
+    }
+
+    public BaseDialog withCancellable(boolean isCancellable) {
+        this.isCancellable = isCancellable;
+        return this;
+    }
+
+    public BaseDialog withCancelOutside(boolean isCancelOutside) {
+        this.isCancelOutside = isCancelOutside;
         return this;
     }
 
