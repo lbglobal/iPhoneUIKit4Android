@@ -54,8 +54,8 @@ public class MainActivity extends BaseActivity {
             case R.id.item3:
                 startActivity(WebViewActivity.createIntent(mActivity,
                         WebViewActivity.class,
-                        "https://m.baidu.com/",
-                        "百度"));
+//                        "https://mobilecodec.alipay.com/client_download.htm?qrcode=bax03180i2jfvmmdw9io40a0",
+                        "https://m.baidu.com/"));
                 break;
 
             case R.id.item4:

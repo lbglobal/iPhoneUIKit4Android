@@ -10,8 +10,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
+import android.webkit.DownloadListener;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -30,18 +32,30 @@ import com.wordplat.uikit.splash.R;
  */
 
 public abstract class AbstractWebViewActivity extends Activity implements View.OnClickListener {
+    private static final String TAG = "AbstractWebViewActivity";
 
+    protected WebView webView;
     private RelativeLayout titleView;
     private ImageButton backBut;
     private ProgressBar progressBar;
-    private WebView webView;
+    private TextView titleTextView;
+
     private boolean isAnimStart = false;
     private int currentProgress;
     private boolean isGoBack = false; // 是否是返回按下。是则不显示进度条
+    private boolean needClearHistory = false; // 是否需要清除历史记录
 
     protected abstract int getBackButResId();
 
     protected abstract int getBackgroundColor();
+
+    protected abstract String onUrlLoading(WebView view, String url);
+
+    protected abstract void onDownload(String url, String mimetype);
+
+    protected void clearHistory() {
+        needClearHistory = true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +73,7 @@ public abstract class AbstractWebViewActivity extends Activity implements View.O
 
         titleView = (RelativeLayout) findViewById(R.id.titleView);
         backBut = (ImageButton) findViewById(R.id.backBut);
-        TextView titleTextView = (TextView) findViewById(R.id.titleText);
+        titleTextView = (TextView) findViewById(R.id.titleText);
 
         backBut.setImageResource(getBackButResId());
         titleView.setBackgroundColor(getBackgroundColor());
@@ -67,8 +81,6 @@ public abstract class AbstractWebViewActivity extends Activity implements View.O
         String title = getIntent().getStringExtra(B);
         if(!TextUtils.isEmpty(title)) {
             titleTextView.setText(title);
-        } else {
-            titleTextView.setText("广告");
         }
 
         backBut.setOnClickListener(this);
@@ -88,9 +100,34 @@ public abstract class AbstractWebViewActivity extends Activity implements View.O
             }
 
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                webView.loadUrl(url);
-                return true; // 在当前webview内部打开url
+            public boolean shouldOverrideUrlLoading(WebView view, String originUrl) {
+                String url = onUrlLoading(view, originUrl);
+                if (!TextUtils.isEmpty(url)) {
+                    // 在当前webview内部打开url
+                    webView.loadUrl(url);
+
+                    WebView.HitTestResult hit = webView.getHitTestResult();
+                    int hitType = hit.getType();
+
+                    if (hitType != WebView.HitTestResult.UNKNOWN_TYPE) {
+                        // 这里执行自定义的操作
+                        return true;
+                    } else{
+                        // 重定向时 hitType 为0 ,执行默认的操作
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            @Override
+            public void doUpdateVisitedHistory(WebView view, String url, boolean isReload) {
+                super.doUpdateVisitedHistory(view, url, isReload);
+                if (needClearHistory) {
+                    needClearHistory = false;
+                    webView.clearHistory();
+                }
             }
         });
 
@@ -110,6 +147,19 @@ public abstract class AbstractWebViewActivity extends Activity implements View.O
                     // 开启属性动画让进度条平滑递增
                     startProgressAnimation(newProgress);
                 }
+            }
+
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                titleTextView.setText(title);
+            }
+        });
+
+        // 下载文件
+        webView.setDownloadListener(new DownloadListener() {
+            @Override
+            public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
+                onDownload(url, mimetype);
             }
         });
 
@@ -178,9 +228,12 @@ public abstract class AbstractWebViewActivity extends Activity implements View.O
     @Override
     public void onBackPressed() {
         if (webView.canGoBack()) {
+            Log.i(TAG, "##d onBackPressed: goBack");
             isGoBack = true;
             webView.goBack(); // 拦截
             return ;
+        } else {
+            Log.i(TAG, "##d onBackPressed: normal");
         }
         super.onBackPressed(); // 放行
 

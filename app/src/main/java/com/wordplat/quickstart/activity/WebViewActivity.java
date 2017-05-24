@@ -1,11 +1,15 @@
 package com.wordplat.quickstart.activity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
+import android.webkit.WebView;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.wordplat.quickstart.R;
+import com.wordplat.uikit.service.DownloadAppService;
 import com.wordplat.uikit.splash.AbstractWebViewActivity;
 
 /**
@@ -16,6 +20,7 @@ import com.wordplat.uikit.splash.AbstractWebViewActivity;
  */
 
 public class WebViewActivity extends AbstractWebViewActivity {
+    public static final String ALIPAY_URL = "https://mobilecodec.alipay.com/client_download.htm";
 
     @Override
     protected int getBackButResId() {
@@ -25,6 +30,57 @@ public class WebViewActivity extends AbstractWebViewActivity {
     @Override
     protected int getBackgroundColor() {
         return getResources().getColor(R.color.colorPrimaryDark);
+    }
+
+    @Override
+    protected String onUrlLoading(WebView view, String url) {
+        if (!TextUtils.isEmpty(url)) {
+            if (url.startsWith("intent://")) {
+                try {
+                    Intent intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
+                    // forbid launching activities without BROWSABLE
+                    // category
+                    intent.addCategory("android.intent.category.BROWSABLE");
+                    // forbid explicit call
+                    intent.setComponent(null);
+                    // forbid intent with selector intent
+                    intent.setSelector(null);
+
+                    if (intent.resolveActivity(getPackageManager()) != null) {
+                        // start the activity by the intent
+                        startActivityIfNeeded(intent, -1);
+
+                        finish();
+
+                        return "";
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                clearHistory();
+
+                return ALIPAY_URL;
+            }
+
+            if (url.endsWith(".apk")) {
+                startService(DownloadAppService.createIntent(this, R.mipmap.ic_launcher, url, "支付宝"));
+
+                return "";
+            }
+        }
+
+        return url;
+    }
+
+    @Override
+    protected void onDownload(String url, String mimetype) {
+        if (!TextUtils.isEmpty(url)) {
+            if (url.endsWith(".apk")) {
+                DownloadAppService.createIntent(this, R.mipmap.ic_launcher, url, "支付宝");
+            }
+        }
     }
 
     @Override
