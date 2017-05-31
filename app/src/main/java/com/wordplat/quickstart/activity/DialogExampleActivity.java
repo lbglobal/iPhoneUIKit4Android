@@ -2,6 +2,7 @@ package com.wordplat.quickstart.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -166,6 +167,7 @@ public class DialogExampleActivity extends BaseActivity {
 
             case R.id.item8:
                 PosterDialog.from(mActivity)
+                        .withImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.poster))
                         .show();
                 break;
         }
