@@ -13,6 +13,7 @@ import android.os.Message;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.support.v4.content.FileProvider;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.wordplat.uikit.splash.R;
@@ -24,6 +25,7 @@ import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.MessageDigest;
 import java.util.concurrent.Executors;
 
 /**
@@ -43,7 +45,7 @@ public class DownloadAppService extends Service {
     ///////////////////////////////////////////////////////////////////////////
     // the notification
     ///////////////////////////////////////////////////////////////////////////
-    
+
     private static int NOTIFICATION_ID = 0;
 
     private NotificationManager notifyManager;
@@ -137,11 +139,11 @@ public class DownloadAppService extends Service {
             switch (msg.what) {
                 case MSG_DOWNLOAD_START:
                     break;
-                
+
                 case MSG_DOWNLOAD_UPDATE:
                     service.updateProgress(notifyBean);
                     break;
-                
+
                 case MSG_DOWNLOAD_END:
                     File apkFile = notifyBean.getApkFile();
                     service.installAPk(apkFile);
@@ -158,7 +160,7 @@ public class DownloadAppService extends Service {
     ///////////////////////////////////////////////////////////////////////////
     // the singleton executor service
     ///////////////////////////////////////////////////////////////////////////
-    
+
     private enum ExecutorService {
         INSTANCE;
 
@@ -256,28 +258,50 @@ public class DownloadAppService extends Service {
                 FileOutputStream out = null;
                 try {
                     URL url = new URL(appUrl);
-                    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                    // 第一个 urlConnection 是为了获取 302 跳转之后的真实地址
+                    HttpURLConnection urlConnection = openUrlConnection(url);
 
-                    urlConnection.setRequestMethod("GET");
-                    urlConnection.setDoOutput(false);
-                    urlConnection.setConnectTimeout(10 * 1000);
-                    urlConnection.setReadTimeout(10 * 1000);
-                    urlConnection.setRequestProperty("Connection", "Keep-Alive");
-                    urlConnection.setRequestProperty("Charset", "UTF-8");
-                    urlConnection.setRequestProperty("Accept-Encoding", "gzip, deflate");
+                    // 这句话必须加上，否则 urlConnection.getURL() 获取的不是 302 跳转的真实地址
+                    String location = urlConnection.getHeaderField("Location");
+                    URL newUrl;
+                    if (!TextUtils.isEmpty(location) && !location.equals(appUrl)) {
+                        newUrl = new URL(location);
+                    } else {
+                        newUrl = urlConnection.getURL();
+                    }
 
-                    urlConnection.connect();
-                    long bytetotal = urlConnection.getContentLength();
+                    // 打开第二个 urlConnection，下载文件时用这个，否则无法下载文件
+                    HttpURLConnection newUrlConnection = openUrlConnection(newUrl);
+                    newUrlConnection.connect();
+
+                    long bytetotal = newUrlConnection.getContentLength();
                     long bytesum = 0;
                     int byteread = 0;
-                    in = urlConnection.getInputStream();
+                    in = newUrlConnection.getInputStream();
 
                     File dir = new File("/sdcard/Download");
                     if(!dir.exists()) {
                         dir.mkdirs();
                     }
 
-                    String apkName = appUrl.substring(appUrl.lastIndexOf("/") + 1, appUrl.length());
+                    MessageDigest md5 = MessageDigest.getInstance("MD5");
+                    byte[] bytes = md5.digest(appUrl.getBytes("utf-8"));
+
+                    // 第一步，将数据全部转换成正数：
+                    String hexString = "";
+                    for (byte b : bytes) {
+                        // 第一步，将数据全部转换成正数
+                        int temp = b & 255;
+                        // 第二步，将所有的数据转换成16进制的形式
+                        if (temp < 16 && temp >= 0) {
+                            // 手动补上一个“0”
+                            hexString = hexString + "0" + Integer.toHexString(temp);
+                        } else {
+                            hexString = hexString + Integer.toHexString(temp);
+                        }
+                    }
+
+                    String apkName = hexString + ".apk";
                     File apkFile = new File(dir, apkName);
 
                     notifyBean.setApkFile(apkFile);
@@ -328,6 +352,21 @@ public class DownloadAppService extends Service {
                 }
             }
         });
+    }
+
+    private HttpURLConnection openUrlConnection(URL url) throws IOException {
+        Log.i(TAG, "##d openUrlConnection: " + url.toString());
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+        urlConnection.setRequestMethod("GET");
+        urlConnection.setDoOutput(false);
+        urlConnection.setConnectTimeout(10 * 1000);
+        urlConnection.setReadTimeout(10 * 1000);
+        urlConnection.setRequestProperty("Connection", "Keep-Alive");
+        urlConnection.setRequestProperty("Charset", "UTF-8");
+        urlConnection.setRequestProperty("Accept-Encoding", "gzip, deflate");
+
+        return urlConnection;
     }
 
     private void updateFailed(NotifyBean notifyBean) {

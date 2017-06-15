@@ -38,6 +38,7 @@ public class PosterDialog extends BaseDialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Dialog_Image = (ImageView) findViewById(R.id.Dialog_Image);
         Dialog_Content = (RelativeLayout) findViewById(R.id.Dialog_Content);
 
         if (bitmap != null) {
